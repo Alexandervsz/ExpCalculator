@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textViewXpPerAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="81dp"
+        android:text="@string/xp_per_action"
+        app:layout_constraintBottom_toTopOf="@+id/textViewActionsRequired"
+        app:layout_constraintStart_toStartOf="@+id/editTextXpPerAction"
+        app:layout_constraintTop_toBottomOf="@+id/editTextXpPerAction" />
+
+    <EditText
+        android:id="@+id/editTextTargetLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="107dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginBottom="3dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTargetLevel"
+        app:layout_constraintEnd_toEndOf="@+id/editTextCurrentXp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewTargetLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="29dp"
+        android:text="@string/target_level"
+        app:layout_constraintBottom_toTopOf="@+id/editTextCurrentXp"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTargetLevel"
+        app:layout_constraintStart_toStartOf="@+id/editTextTargetLevel"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTargetLevel" />
+
+    <EditText
+        android:id="@+id/editTextCurrentXp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/textViewCurrentXp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTargetLevel" />
+
+    <TextView
+        android:id="@+id/textViewCurrentXp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="11dp"
+        android:text="@string/current_xp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextXpPerAction"
+        app:layout_constraintStart_toStartOf="@+id/editTextCurrentXp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCurrentXp" />
+
+    <EditText
+        android:id="@+id/editTextXpPerAction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="31dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/textViewXpPerAction"
+        app:layout_constraintEnd_toEndOf="@+id/editTextCurrentXp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCurrentXp" />
+
+    <Button
+        android:id="@+id/buttonCalculate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="93dp"
+        android:text="@string/calculate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewRequiredActions" />
+
+    <TextView
+        android:id="@+id/textViewActionsRequired"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="34dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/textViewRequiredActions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewXpPerAction" />
+
+    <TextView
+        android:id="@+id/textViewRequiredActions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
+        android:text="@string/required_actions"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCalculate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewActionsRequired" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

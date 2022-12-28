@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ExpCalculator</string>
+    <string name="target_level">Target level</string>
+    <string name="current_xp">Current experience</string>
+    <string name="xp_per_action">Experience per action</string>
+    <string name="required_actions">Required actions</string>
+    <string name="calculate">Calculate</string>
+</resources>
