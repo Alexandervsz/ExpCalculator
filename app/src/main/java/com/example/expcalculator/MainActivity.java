@@ -9,8 +9,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.SortedMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -143,22 +141,20 @@ public class MainActivity extends AppCompatActivity {
         expTable.put(119, 94442737);
         expTable.put(120, 104273167);
         Button button = findViewById(R.id.buttonCalculate);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int currentXp = Integer.parseInt(String.valueOf(textViewCurrentXp.getText()));
-                System.out.println(currentXp);
-                int targetLevel = Integer.parseInt(String.valueOf(textViewTargetLevel.getText()));
-                System.out.println(targetLevel);
-                int xpPerAction = Integer.parseInt(String.valueOf(textViewXpPerAction.getText()));
-                System.out.println(xpPerAction);
-                int requiredExperience = expTable.get(targetLevel) - currentXp;
-                System.out.println(requiredExperience);
-                float requiredActions = requiredExperience / xpPerAction;
-                System.out.println();
-                textViewRequiredActions.setText(String.valueOf((Math.ceil(requiredActions))).replaceAll("\\.0*$", ""));
-
-
+        button.setOnClickListener(view -> {
+            int currentXp = Integer.parseInt(String.valueOf(textViewCurrentXp.getText()));
+            int targetLevel = Integer.parseInt(String.valueOf(textViewTargetLevel.getText()));
+            int xpPerAction = Integer.parseInt(String.valueOf(textViewXpPerAction.getText()));
+            if (expTable.get(targetLevel) != null) {
+                @SuppressWarnings("ConstantConditions") float requiredExperience = expTable.get(targetLevel) - currentXp;
+                if (requiredExperience < 0) {
+                    textViewRequiredActions.setText(R.string.i_xp);
+                    return;
+                }
+                int requiredActions = (int) Math.ceil(requiredExperience / xpPerAction);
+                textViewRequiredActions.setText(String.valueOf(requiredActions).replaceAll("\\.0*$", ""));
+            } else {
+                textViewRequiredActions.setText(R.string.i_level);
             }
         });
     }
