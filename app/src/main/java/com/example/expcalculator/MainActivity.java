@@ -1,26 +1,15 @@
 package com.example.expcalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-
-import android.app.AlarmManager;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.SystemClock;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.LinkedHashMap;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-
-    private int timeMS = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,15 +148,26 @@ public class MainActivity extends AppCompatActivity {
             int currentXp = Integer.parseInt(String.valueOf(textViewCurrentXp.getText()));
             int targetLevel = Integer.parseInt(String.valueOf(textViewTargetLevel.getText()));
             int xpPerAction = Integer.parseInt(String.valueOf(textViewXpPerAction.getText()));
+            if (xpPerAction == 0) {
+                textViewRequiredActions.setText("");
+                textViewActionsRequired.setText(R.string.i_pa);
+                return;
+            }
             double timePerAction = 0.0;
-            if (!(textViewTimePerAction.getText().equals(""))) {
+            if (textViewTimePerAction.getText().toString().equals("")) {
+                textViewTimeRequired.setText("");
+                textViewTimeRequiredText.setText("");
+            } else {
                 timePerAction = Double.parseDouble(String.valueOf(textViewTimePerAction.getText()));
+                if (timePerAction == 0) {
+                    textViewTimeRequired.setText("");
+                    textViewTimeRequiredText.setText("");
+                }
             }
             if (expTable.get(targetLevel) != null) {
-                @SuppressWarnings("ConstantConditions")
-                float requiredExperience = expTable.get(targetLevel) - currentXp;
+                @SuppressWarnings("ConstantConditions") float requiredExperience = expTable.get(targetLevel) - currentXp;
                 if (requiredExperience < 0) {
-                    textViewRequiredActions.setText(R.string.i_xp);
+                    textViewActionsRequired.setText(R.string.i_xp);
                     return;
                 }
                 int requiredActions = (int) Math.ceil(requiredExperience / xpPerAction);
@@ -175,16 +175,19 @@ public class MainActivity extends AppCompatActivity {
                 textViewActionsRequired.setText(R.string.required_actions);
                 if (timePerAction > 0.0) {
                     double time = requiredActions * timePerAction;
-                    timeMS = (int) Math.ceil(time * 1000);
                     int hours = (int) Math.floor(time / 3600);
                     int minutes = (int) Math.floor(((time / 3600) - hours) * 60);
                     int seconds = (int) Math.ceil(((((time / 3600) - hours) * 60) - minutes) * 60);
-                    textViewTimeRequired.setText(hours + " hours, " + minutes + " minutes, " + seconds + " seconds");
+                    textViewTimeRequired.setText(String.format(Locale.US, "%d%s%d%s%d%s",
+                            hours, this.getResources().getString(R.string.hours), minutes,
+                            this.getResources().getString(R.string.minutes), seconds,
+                            this.getResources().getString(R.string.seconds)));
                     textViewTimeRequiredText.setText(R.string.required_time);
                 }
 
             } else {
-                textViewRequiredActions.setText(R.string.i_level);
+                textViewRequiredActions.setText("");
+                textViewActionsRequired.setText(R.string.i_level);
             }
         });
     }

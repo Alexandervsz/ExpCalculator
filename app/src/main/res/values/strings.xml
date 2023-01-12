@@ -9,4 +9,8 @@
     <string name="calculate">Calculate</string>
     <string name="i_level">Invalid level!</string>
     <string name="i_xp">Invalid amount of experience!</string>
+    <string name="i_pa">Invalid amount of experience per action!</string>
+    <string name="hours">&#160;hours,&#160;</string>
+    <string name="minutes">&#160;minutes,&#160;</string>
+    <string name="seconds">&#160;seconds.</string>
 </resources>
