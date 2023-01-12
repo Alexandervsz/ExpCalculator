@@ -1,8 +1,17 @@
 package com.example.expcalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.app.AlarmManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,6 +20,8 @@ import java.util.LinkedHashMap;
 
 public class MainActivity extends AppCompatActivity {
 
+    private int timeMS = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +29,11 @@ public class MainActivity extends AppCompatActivity {
         EditText textViewCurrentXp = findViewById(R.id.editTextCurrentXp);
         EditText textViewTargetLevel = findViewById(R.id.editTextTargetLevel);
         EditText textViewXpPerAction = findViewById(R.id.editTextXpPerAction);
+        EditText textViewTimePerAction = findViewById(R.id.editTextTimePerAction);
         TextView textViewRequiredActions = findViewById(R.id.textViewActionsRequired);
+        TextView textViewActionsRequired = findViewById(R.id.textViewRequiredActions);
+        TextView textViewTimeRequired = findViewById(R.id.textViewTimeRequired);
+        TextView textViewTimeRequiredText = findViewById(R.id.textViewTimeRequiredText);
         LinkedHashMap<Integer, Integer> expTable = new LinkedHashMap<>();
         expTable.put(2, 83);
         expTable.put(3, 174);
@@ -144,14 +159,30 @@ public class MainActivity extends AppCompatActivity {
             int currentXp = Integer.parseInt(String.valueOf(textViewCurrentXp.getText()));
             int targetLevel = Integer.parseInt(String.valueOf(textViewTargetLevel.getText()));
             int xpPerAction = Integer.parseInt(String.valueOf(textViewXpPerAction.getText()));
+            double timePerAction = 0.0;
+            if (!(textViewTimePerAction.getText().equals(""))) {
+                timePerAction = Double.parseDouble(String.valueOf(textViewTimePerAction.getText()));
+            }
             if (expTable.get(targetLevel) != null) {
-                @SuppressWarnings("ConstantConditions") float requiredExperience = expTable.get(targetLevel) - currentXp;
+                @SuppressWarnings("ConstantConditions")
+                float requiredExperience = expTable.get(targetLevel) - currentXp;
                 if (requiredExperience < 0) {
                     textViewRequiredActions.setText(R.string.i_xp);
                     return;
                 }
                 int requiredActions = (int) Math.ceil(requiredExperience / xpPerAction);
                 textViewRequiredActions.setText(String.valueOf(requiredActions).replaceAll("\\.0*$", ""));
+                textViewActionsRequired.setText(R.string.required_actions);
+                if (timePerAction > 0.0) {
+                    double time = requiredActions * timePerAction;
+                    timeMS = (int) Math.ceil(time * 1000);
+                    int hours = (int) Math.floor(time / 3600);
+                    int minutes = (int) Math.floor(((time / 3600) - hours) * 60);
+                    int seconds = (int) Math.ceil(((((time / 3600) - hours) * 60) - minutes) * 60);
+                    textViewTimeRequired.setText(hours + " hours, " + minutes + " minutes, " + seconds + " seconds");
+                    textViewTimeRequiredText.setText(R.string.required_time);
+                }
+
             } else {
                 textViewRequiredActions.setText(R.string.i_level);
             }
