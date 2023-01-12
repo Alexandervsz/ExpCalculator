@@ -197,12 +197,10 @@ public class MainActivity extends AppCompatActivity {
                     textViewTimeRequired.setText(String.format(Locale.US, "%d%s%d%s%d%s", hours, this.getResources().getString(R.string.hours), minutes, this.getResources().getString(R.string.minutes), seconds, this.getResources().getString(R.string.seconds)));
                     textViewTimeRequiredText.setText(R.string.required_time);
                 }
-
             } else {
                 SetError(this.getResources().getString(R.string.i_level));
             }
         });
-
     }
 
     private void ClearTime() {
@@ -214,6 +212,5 @@ public class MainActivity extends AppCompatActivity {
         textViewRequiredActions.setText("");
         textViewActionsRequired.setText(errorMessage);
         ClearTime();
-
     }
 }
