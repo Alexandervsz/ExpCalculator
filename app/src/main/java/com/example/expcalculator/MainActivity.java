@@ -1,6 +1,7 @@
 package com.example.expcalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +12,11 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    TextView textViewRequiredActions;
+    TextView textViewActionsRequired;
+    TextView textViewTimeRequired;
+    TextView textViewTimeRequiredText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,10 +25,10 @@ public class MainActivity extends AppCompatActivity {
         EditText textViewTargetLevel = findViewById(R.id.editTextTargetLevel);
         EditText textViewXpPerAction = findViewById(R.id.editTextXpPerAction);
         EditText textViewTimePerAction = findViewById(R.id.editTextTimePerAction);
-        TextView textViewRequiredActions = findViewById(R.id.textViewActionsRequired);
-        TextView textViewActionsRequired = findViewById(R.id.textViewRequiredActions);
-        TextView textViewTimeRequired = findViewById(R.id.textViewTimeRequired);
-        TextView textViewTimeRequiredText = findViewById(R.id.textViewTimeRequiredText);
+        textViewRequiredActions = findViewById(R.id.textViewActionsRequired);
+        textViewActionsRequired = findViewById(R.id.textViewRequiredActions);
+        textViewTimeRequired = findViewById(R.id.textViewTimeRequired);
+        textViewTimeRequiredText = findViewById(R.id.textViewTimeRequiredText);
         LinkedHashMap<Integer, Integer> expTable = new LinkedHashMap<>();
         expTable.put(2, 83);
         expTable.put(3, 174);
@@ -145,29 +151,39 @@ public class MainActivity extends AppCompatActivity {
         expTable.put(120, 104273167);
         Button button = findViewById(R.id.buttonCalculate);
         button.setOnClickListener(view -> {
-            int currentXp = Integer.parseInt(String.valueOf(textViewCurrentXp.getText()));
+            if (textViewTargetLevel.getText().toString().equals("")) {
+                SetError(this.getResources().getString(R.string.i_level));
+                return;
+            }
             int targetLevel = Integer.parseInt(String.valueOf(textViewTargetLevel.getText()));
+            if (textViewCurrentXp.getText().toString().equals("")) {
+                SetError(this.getResources().getString(R.string.i_xp));
+                return;
+            }
+            int currentXp = Integer.parseInt(String.valueOf(textViewCurrentXp.getText()));
+
+            if (textViewXpPerAction.getText().toString().equals("")) {
+                SetError(this.getResources().getString(R.string.i_pa));
+                return;
+            }
             int xpPerAction = Integer.parseInt(String.valueOf(textViewXpPerAction.getText()));
             if (xpPerAction == 0) {
-                textViewRequiredActions.setText("");
-                textViewActionsRequired.setText(R.string.i_pa);
+                SetError(this.getResources().getString(R.string.i_pa));
                 return;
             }
             double timePerAction = 0.0;
             if (textViewTimePerAction.getText().toString().equals("")) {
-                textViewTimeRequired.setText("");
-                textViewTimeRequiredText.setText("");
+                ClearTime();
             } else {
                 timePerAction = Double.parseDouble(String.valueOf(textViewTimePerAction.getText()));
                 if (timePerAction == 0) {
-                    textViewTimeRequired.setText("");
-                    textViewTimeRequiredText.setText("");
+                    ClearTime();
                 }
             }
             if (expTable.get(targetLevel) != null) {
                 @SuppressWarnings("ConstantConditions") float requiredExperience = expTable.get(targetLevel) - currentXp;
                 if (requiredExperience < 0) {
-                    textViewActionsRequired.setText(R.string.i_xp);
+                    SetError(this.getResources().getString(R.string.i_xp));
                     return;
                 }
                 int requiredActions = (int) Math.ceil(requiredExperience / xpPerAction);
@@ -178,17 +194,26 @@ public class MainActivity extends AppCompatActivity {
                     int hours = (int) Math.floor(time / 3600);
                     int minutes = (int) Math.floor(((time / 3600) - hours) * 60);
                     int seconds = (int) Math.ceil(((((time / 3600) - hours) * 60) - minutes) * 60);
-                    textViewTimeRequired.setText(String.format(Locale.US, "%d%s%d%s%d%s",
-                            hours, this.getResources().getString(R.string.hours), minutes,
-                            this.getResources().getString(R.string.minutes), seconds,
-                            this.getResources().getString(R.string.seconds)));
+                    textViewTimeRequired.setText(String.format(Locale.US, "%d%s%d%s%d%s", hours, this.getResources().getString(R.string.hours), minutes, this.getResources().getString(R.string.minutes), seconds, this.getResources().getString(R.string.seconds)));
                     textViewTimeRequiredText.setText(R.string.required_time);
                 }
 
             } else {
-                textViewRequiredActions.setText("");
-                textViewActionsRequired.setText(R.string.i_level);
+                SetError(this.getResources().getString(R.string.i_level));
             }
         });
+
+    }
+
+    private void ClearTime() {
+        textViewTimeRequired.setText("");
+        textViewTimeRequiredText.setText("");
+    }
+
+    private void SetError(String errorMessage) {
+        textViewRequiredActions.setText("");
+        textViewActionsRequired.setText(errorMessage);
+        ClearTime();
+
     }
 }
