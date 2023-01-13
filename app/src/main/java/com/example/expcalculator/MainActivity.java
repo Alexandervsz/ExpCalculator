@@ -160,10 +160,13 @@ public class MainActivity extends AppCompatActivity implements KeyEvent.Callback
      * @param textView The textview to be copied.
      */
     private void TextHandler(TextView textView){
+        if (textView.getText().toString().equals("")){
+            return;
+        }
         ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("test", textView.getText());
+        ClipData clip = ClipData.newPlainText("copied text", textView.getText());
         clipboard.setPrimaryClip(clip);
-        Toast.makeText(this, "Copied to clipboard!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, "Copied to clipboard!", Toast.LENGTH_SHORT).show();
     }
 
 }
