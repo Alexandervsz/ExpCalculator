@@ -10,9 +10,12 @@
         android:id="@+id/textViewTimeRequiredText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginEnd="72dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="23dp"
         android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCalculate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTimeRequired" />
@@ -21,126 +24,132 @@
         android:id="@+id/textViewTimeRequired"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="151dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/required_time"
+        android:minHeight="48dp"
         android:textAlignment="center"
         android:textIsSelectable="true"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonCalculate"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTimeRequiredText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textViewTimePerAction" />
-
-    <TextView
-        android:id="@+id/textViewXpPerAction"
-        android:layout_width="211dp"
-        android:layout_height="wrap_content"
-        android:text="@string/xp_per_action"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextXpPerAction" />
-
-    <TextView
-        android:id="@+id/textViewTimePerAction"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/time_per_action"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="@+id/editTextTimePerAction"
-        app:layout_constraintStart_toStartOf="@+id/editTextTimePerAction"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTimePerAction" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewRequiredActions" />
 
     <EditText
         android:id="@+id/editTextTargetLevel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="58dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="26dp"
+        android:autofillHints="level"
         android:ems="10"
+        android:hint="@string/target_level"
         android:inputType="number"
-        app:layout_constraintStart_toStartOf="@+id/textViewTargetLevel"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/editTextCurrentXp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewTargetLevel"
-        android:layout_width="208dp"
-        android:layout_height="wrap_content"
-        android:text="@string/target_level"
+    <EditText
+        android:id="@+id/editTextCurrentXp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="29dp"
+        android:autofillHints="experience"
+        android:ems="10"
+        android:hint="@string/current_xp"
+        android:inputType="number"
+        android:minHeight="48dp"
         android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/editTextXpPerAction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTargetLevel" />
 
     <EditText
-        android:id="@+id/editTextCurrentXp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="41dp"
+        android:id="@+id/editTextXpPerAction"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="22dp"
+        android:autofillHints="experience per action"
         android:ems="10"
+        android:hint="@string/xp_per_action"
         android:inputType="number"
-        app:layout_constraintStart_toStartOf="@+id/textViewCurrentXp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTargetLevel" />
-
-    <TextView
-        android:id="@+id/textViewCurrentXp"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
-        android:text="@string/current_xp"
+        android:minHeight="48dp"
         android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTimePerAction"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextCurrentXp" />
 
-    <EditText
-        android:id="@+id/editTextXpPerAction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintStart_toStartOf="@+id/textViewXpPerAction"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCurrentXp" />
-
     <Button
         android:id="@+id/buttonCalculate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="11dp"
+        android:layout_width="225dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="14dp"
         android:text="@string/calculate"
+        android:textColor="@color/white"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTimeRequiredText" />
 
     <TextView
         android:id="@+id/textViewActionsRequired"
-        android:layout_width="249dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="35dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/required_actions"
+        android:minHeight="48dp"
         android:textAlignment="center"
         android:textIsSelectable="true"
-        app:layout_constraintBottom_toTopOf="@+id/textViewTimeRequired"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewRequiredActions"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTimePerAction" />
 
     <TextView
         android:id="@+id/textViewRequiredActions"
-        android:layout_width="249dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="37dp"
         android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTimeRequired"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewActionsRequired" />
 
     <EditText
         android:id="@+id/editTextTimePerAction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="3dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="35dp"
+        android:autofillHints="time per action"
         android:ems="10"
+        android:hint="@string/time_per_action"
         android:inputType="numberDecimal"
-        app:layout_constraintEnd_toEndOf="@+id/textViewXpPerAction"
-        app:layout_constraintTop_toBottomOf="@+id/textViewXpPerAction" />
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/textViewActionsRequired"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextXpPerAction" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
