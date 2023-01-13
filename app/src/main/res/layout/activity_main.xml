@@ -6,38 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textViewTimeRequiredText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="23dp"
-        android:focusable="false"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonCalculate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTimeRequired" />
-
-    <TextView
-        android:id="@+id/textViewTimeRequired"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:contentDescription="@string/required_time"
-        android:focusable="false"
-        android:minHeight="48dp"
-        android:textAlignment="center"
-        android:textIsSelectable="true"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewTimeRequiredText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewRequiredActions" />
-
     <EditText
         android:id="@+id/editTextTargetLevel"
         android:layout_width="0dp"
@@ -55,7 +23,10 @@
         app:layout_constraintBottom_toTopOf="@+id/editTextCurrentXp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+    >
+        <requestFocus/>
+    </EditText>
 
     <EditText
         android:id="@+id/editTextCurrentXp"
@@ -93,51 +64,72 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextCurrentXp" />
 
-    <Button
-        android:id="@+id/buttonCalculate"
-        android:layout_width="225dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="14dp"
-        android:focusable="false"
-        android:text="@string/calculate"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTimeRequiredText" />
-
     <TextView
         android:id="@+id/textViewActionsRequired"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:contentDescription="@string/required_actions"
         android:focusable="false"
+        android:focusableInTouchMode="true"
         android:minHeight="48dp"
         android:textAlignment="center"
         android:textIsSelectable="true"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewRequiredActions"
+        app:layout_constraintBottom_toTopOf="@+id/textViewActionsRequiredText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTimePerAction" />
 
     <TextView
-        android:id="@+id/textViewRequiredActions"
+        android:id="@+id/textViewActionsRequiredText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="37dp"
-        android:focusable="false"
+        android:focusable="auto"
         android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textViewTimeRequired"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewActionsRequired" />
+
+    <TextView
+        android:id="@+id/textViewTimeRequired"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/required_time"
+        android:focusable="false"
+        android:focusableInTouchMode="true"
+        android:minHeight="48dp"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
+        android:textIsSelectable="true"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTimeRequiredText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewActionsRequiredText" />
+
+    <TextView
+        android:id="@+id/textViewTimeRequiredText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="23dp"
+        android:focusable="false"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonCalculate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTimeRequired" />
 
     <EditText
         android:id="@+id/editTextTimePerAction"
@@ -151,11 +143,24 @@
         android:hint="@string/time_per_action"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
-        android:nextFocusDown="@id/buttonCalculate"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/textViewActionsRequired"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextXpPerAction" />
+
+    <Button
+        android:id="@+id/buttonCalculate"
+        android:layout_width="225dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="14dp"
+        android:focusable="false"
+        android:text="@string/calculate"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTimeRequiredText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
